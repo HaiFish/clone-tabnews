@@ -1,0 +1,24 @@
+{
+  "name": "clone-tabnews",
+  "version": "1.0.0",
+  "description": "Implementação do https://www.tabnews.com.br para o https://curso.dev",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaiFish/clone-tabnews.git"
+  },
+  "author": "Anderson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HaiFish/clone-tabnews/issues"
+  },
+  "homepage": "https://github.com/HaiFish/clone-tabnews#readme",
+  "dependencies": {
+    "next": "^15.5.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}
