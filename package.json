@@ -4,7 +4,9 @@
   "description": "Implementação do https://www.tabnews.com.br para o https://curso.dev",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev"
+    "dev": "next dev",
+    "lint:check": "prettier --check .",
+    "lint:fix": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,8 @@
   },
   "allowScripts": {
     "sharp@0.34.4": true
+  },
+  "devDependencies": {
+    "prettier": "^3.9.6"
   }
 }
