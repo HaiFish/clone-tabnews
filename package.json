@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "lint:check": "prettier --check .",
-    "lint:fix": "prettier --write ."
+    "lint:fix": "prettier --write .",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -24,9 +26,12 @@
     "react-dom": "^19.2.8"
   },
   "allowScripts": {
-    "sharp@0.34.4": true
+    "sharp@0.34.4": true,
+    "@parcel/watcher@2.6.0": true,
+    "unrs-resolver@1.12.2": true
   },
   "devDependencies": {
+    "jest": "^30.5.0",
     "prettier": "^3.9.6"
   }
 }
