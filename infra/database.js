@@ -15,6 +15,7 @@ async function query(queryObject) {
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DB,
     ssl: process.env.NODE_ENV === "development" ? false : true,
+    channel_binding: process.env.POSTGRES_BINDING || "prefer",
   });
 
   try {
