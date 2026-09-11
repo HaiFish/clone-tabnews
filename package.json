@@ -11,7 +11,10 @@
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
     "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "migration:create": "node-pg-migrate -m infra/migrations create",
+    "migration:up": "node-pg-migrate -m infra/migrations up",
+    "migration:down": "node-pg-migrate -m infra/migrations down"
   },
   "repository": {
     "type": "git",
@@ -24,7 +27,10 @@
   },
   "homepage": "https://github.com/HaiFish/clone-tabnews#readme",
   "dependencies": {
+    "dotenv": "^17.4.2",
+    "dotenv-expand": "^1000.0.0",
     "next": "^16.3.1",
+    "node-pg-migrate": "^9.0.0",
     "pg": "^8.23.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
