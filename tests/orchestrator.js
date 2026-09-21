@@ -11,9 +11,9 @@ async function waitForAllServices() {
 
     async function fetchStatusPage() {
       const response = await fetch("http://localhost:3000/api/v1/status");
-      const responseBody = await response.json();
-      if (!responseBody || responseBody.status !== "ok") {
-        throw new Error("Web server is not ready");
+
+      if (response.status !== 200) {
+        throw Error();
       }
     }
   }
