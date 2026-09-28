@@ -12,6 +12,7 @@ const jestConfig = createJestConfig({
     "^@/(.*)$": "<rootDir>/$1",
   },
   testTimeout: 30000,
+  roots: ["<rootDir>/tests"],
 });
 
 module.exports = jestConfig;
