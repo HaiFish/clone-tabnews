@@ -1,4 +1,5 @@
 import database from "@/infra/database";
+import { InternalServerError } from "@/infra/errors";
 
 async function status(request, response) {
   let databaseStatus;
@@ -13,10 +14,9 @@ async function status(request, response) {
       WHERE datname = current_database();
     `);
   } catch (error) {
-    response.status(503).json({
-      error: "Database unavailable",
-      reason: error.reason || "query_failed",
-    });
+    const publicError = new InternalServerError({ cause: error });
+    console.error("PUBLIC ERROR:", publicError);
+    response.status(500).json(publicError);
     return;
   }
 
