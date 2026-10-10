@@ -1,11 +1,17 @@
+import { createRouter } from "next-connect";
 import database from "@/infra/database";
-import { InternalServerError } from "@/infra/errors";
+import controllers from "@/infra/controller";
 
-async function status(request, response) {
+const router = createRouter();
+
+router.get(getHandler);
+
+export default router.handler(controllers.errorHandlers);
+
+async function getHandler(request, response) {
   let databaseStatus;
 
-  try {
-    databaseStatus = await database.query(`
+  databaseStatus = await database.query(`
       SELECT
         current_setting('server_version') AS version,
         current_setting('max_connections')::int AS max_connections,
@@ -13,12 +19,6 @@ async function status(request, response) {
       FROM pg_stat_activity
       WHERE datname = current_database();
     `);
-  } catch (error) {
-    const publicError = new InternalServerError({ cause: error });
-    console.error("PUBLIC ERROR:", publicError);
-    response.status(500).json(publicError);
-    return;
-  }
 
   const updatedAt = new Date().toISOString();
   response.status(200).json({
@@ -28,5 +28,3 @@ async function status(request, response) {
     },
   });
 }
-
-export default status;
