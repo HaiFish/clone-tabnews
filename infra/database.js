@@ -1,11 +1,5 @@
 import { Client } from "pg";
-
-const connectionErrors = new Set([
-  "ECONNREFUSED",
-  "ENOTFOUND",
-  "ETIMEDOUT",
-  "EHOSTUNREACH",
-]);
+import { ServiceError } from "@/infra/errors";
 
 async function query(queryObject) {
   let client;
@@ -14,15 +8,11 @@ async function query(queryObject) {
     const result = await client.query(queryObject);
     return result;
   } catch (error) {
-    if (error.code === "53300") {
-      error.reason = "connection_limit";
-    } else if (connectionErrors.has(error.code)) {
-      error.reason = "offline";
-    } else {
-      error.reason = "query_failed";
-    }
-
-    throw error;
+    const serviceErrorObject = new ServiceError({
+      cause: error,
+      message: "Erro na conexão com o Banco de dados ou na query.",
+    });
+    throw serviceErrorObject;
   } finally {
     await client?.end();
   }
