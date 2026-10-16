@@ -5,6 +5,7 @@ import database from "@/infra/database";
 const defaultMigrationsOptions = {
   dir: resolve("infra", "migrations"),
   direction: "up",
+  log: () => {},
   migrationsTable: "pgmigrations",
   dryRun: false,
   verbose: true,
