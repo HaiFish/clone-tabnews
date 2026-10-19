@@ -5,37 +5,38 @@ import database from "@/infra/database";
 const defaultMigrationsOptions = {
   dir: resolve("infra", "migrations"),
   direction: "up",
+  log: () => {},
   migrationsTable: "pgmigrations",
   dryRun: false,
   verbose: true,
 };
 
 async function listPendingMigrations() {
+  let dbClient;
   try {
+    dbClient = await database.getNewClient();
     const pendingMigrations = await runner({
       ...defaultMigrationsOptions,
-      dbClient: await database.getNewClient(),
+      dbClient,
       dryRun: true,
     });
     return pendingMigrations;
   } finally {
-    if (defaultMigrationsOptions.dbClient) {
-      await defaultMigrationsOptions.dbClient.end();
-    }
+    await dbClient?.end();
   }
 }
 
 async function runPendingMigrations() {
+  let dbClient;
   try {
+    dbClient = await database.getNewClient();
     const migratedMigrations = await runner({
       ...defaultMigrationsOptions,
-      dbClient: await database.getNewClient(),
+      dbClient,
     });
     return migratedMigrations;
   } finally {
-    if (defaultMigrationsOptions.dbClient) {
-      await defaultMigrationsOptions.dbClient.end();
-    }
+    await dbClient?.end();
   }
 }
 
