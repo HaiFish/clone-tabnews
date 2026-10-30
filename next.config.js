@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["node-pg-migrate", "uuid"],
+  transpilePackages: ["@faker-js/faker", "node-pg-migrate", "uuid"],
   outputFileTracingIncludes: {
     "/api/v1/migrations": ["./infra/migrations/**/*"],
   },
